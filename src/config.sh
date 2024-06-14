@@ -9,6 +9,8 @@ fi
 if [ -n "$PASSWORD" ]; then
     # shellcheck disable=SC2034
     CURL_AUTH_ARGS=(--user "admin:$PASSWORD")
+elif [ -n "$BEARER_TOKEN" ]; then
+    CURL_AUTH_ARGS=(-H "Authorization: Bearer $BEARER_TOKEN")
 elif [ -f ~/.netrc ] && grep --quiet "${API_HOST##*://}" ~/.netrc; then
     # shellcheck disable=SC2034
     CURL_AUTH_ARGS=(--netrc)
